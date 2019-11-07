@@ -44,10 +44,18 @@ public class TestServlet extends HttpServlet {
 			myConn = dataSource.getConnection();
 			
 			// create sql statements
+			String sql = "select * from student";
+			myStmt = myConn.createStatement();
 
 			// execute sql statements
+			myRs = myStmt.executeQuery(sql);
 
 			// process the result set
+			while(myRs.next()) {
+				String email = myRs.getString("email");
+				out.println(email);
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
