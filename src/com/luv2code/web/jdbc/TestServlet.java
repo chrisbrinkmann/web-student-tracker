@@ -1,6 +1,10 @@
 package com.luv2code.web.jdbc;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -18,22 +22,35 @@ public class TestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	// Define datasource/connection pool for Resource Injection
-	@Resource(name="jdbc/web_student_tracker")
+	@Resource(name = "jdbc/web_student_tracker")
 	private DataSource dataSource;
-	
+
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// set up the printwriter
-		
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/plain");
+
 		// get a connection to the database
-		
-		// create sql statements
-		
-		// execute sql statements
-		
-		// process the result set
+		Connection myConn = null;
+		Statement myStmt = null;
+		ResultSet myRs = null;
+
+		try {
+			// get a connection from the connection pool
+			myConn = dataSource.getConnection();
+			
+			// create sql statements
+
+			// execute sql statements
+
+			// process the result set
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
