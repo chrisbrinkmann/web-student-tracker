@@ -1,6 +1,7 @@
 package com.luv2code.web.jdbc;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -50,19 +51,12 @@ public class StudentDbUtil {
 				// add it to the list of students
 				students.add(student);
 			}
-
-			// close JDBC objects
-			close(myConn, myStmt, myRs);
-
 			return students;
 
-		} catch (Exception e) {
-
 		} finally {
-
+			// close JDBC objects
+			close(myConn, myStmt, myRs);
 		}
-
-		return students;
 	}
 
 	private void close(Connection myConn, Statement myStmt, ResultSet myRs) {
@@ -81,6 +75,36 @@ public class StudentDbUtil {
 
 		} catch (Exception e) {
 			System.out.println("There was a problem closing the JDBC resources.");
+		}
+
+	}
+
+	public void addStudent(Student student) throws Exception {
+
+		// initialize our JDBC objects
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+
+		try {
+			// get a connection from the pool
+			myConn = dataSource.getConnection();
+
+			// create sql statement
+			String sql = "insert into student " + "(first_name, last_name, email) " + "values (?, ?, ?)";
+
+			myStmt = myConn.prepareStatement(sql);
+
+			// set the param values (?) for the student
+			myStmt.setString(1, student.getFirstName());
+			myStmt.setString(2, student.getLastName());
+			myStmt.setString(3, student.getEmail());
+
+			// execute query
+			myStmt.executeQuery(sql);
+
+		} finally {
+			// close JDBC objects
+			close(myConn, myStmt, null);
 		}
 
 	}
