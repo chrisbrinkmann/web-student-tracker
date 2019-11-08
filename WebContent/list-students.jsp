@@ -1,4 +1,4 @@
-<%@ page import="java.util.*, com.luv2code.web.jdbc.*"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html>
@@ -10,10 +10,10 @@
 <title>Student Tracker</title>
 </head>
 
-<%
+<%-- <%
 	// get the students form the request object (sent by servlet)
 	List<Student> students = (List<Student>) request.getAttribute("students");
-%>
+%> --%>
 
 <body>
 
@@ -35,19 +35,14 @@
 				</thead>
 
 				<tbody>
-					<%
-						for (Student student : students) {
-					%>
-					<tr>
-						<td><%=student.getFirstName()%></td>
-						<td><%=student.getLastName()%></td>
-						<td><%=student.getEmail()%></td>
-					</tr>
-					<%
-						}
-					%>
+					<c:forEach var="student" items="${students }">
+						<tr>
+							<td>${student.firstName }</td>
+							<td>${student.lastName }</td>
+							<td>${student.email }</td>
+						</tr>
+					</c:forEach>
 				</tbody>
-
 			</table>
 		</div>
 	</div>

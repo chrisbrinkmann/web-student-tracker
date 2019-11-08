@@ -1,6 +1,7 @@
 <Context>
 
 	<!-- JDBC config -->
+	<!-- The JDBC driver is in /WEB-IN/lib/my-sql-connector-java... -->
   <Resource name="jdbc/web_student_tracker" 
   			auth="Container" type="javax.sql.DataSource"
                maxActive="20" maxIdle="5" maxWait="10000"
