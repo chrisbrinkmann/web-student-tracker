@@ -108,4 +108,51 @@ public class StudentDbUtil {
 		}
 
 	}
+
+	public Student getStudent(String studentId) throws Exception {
+		Student student = null;
+		int id = Integer.parseInt(studentId);
+
+		// initialize our JDBC objects
+		Connection myConn = null;
+		PreparedStatement myStmt = null;
+		ResultSet myRs = null;
+
+		try {
+
+			// get connection to db
+			myConn = dataSource.getConnection();
+
+			// create sql to get selected student
+			String sql = "select * from student where id=?";
+
+			// create prepared statement
+			myStmt = myConn.prepareStatement(sql);
+
+			// set params
+			myStmt.setInt(1, id);
+
+			// execute statement
+			myRs = myStmt.executeQuery();
+
+			// retreive data from result set row
+			if (myRs.next()) {
+				String firstName = myRs.getString("first_name");
+				String lastName = myRs.getString("last_name");
+				String email = myRs.getString("email");
+
+				// create a new student object
+				// use the studentId during construction
+				student = new Student(id, firstName, lastName, email);
+			} else {
+				throw new Exception("Could not find student with id: " + id);
+			}
+
+			return student;
+		} finally {
+			// close JDBC objects
+			close(myConn, myStmt, null);
+		}
+
+	}
 }
