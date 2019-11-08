@@ -22,7 +22,7 @@
 		<div id="content">
 		
 			<input type="button" value="Add User"
-				onclick="window.location.herf='add-student-form.jsp'; return false;"
+				onclick="window.location.href='add-student-form.jsp'; return false;"
 				class="add-student-button" />
 		
 			<table>
