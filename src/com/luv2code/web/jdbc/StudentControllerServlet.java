@@ -69,6 +69,10 @@ public class StudentControllerServlet extends HttpServlet {
 			case "LOAD":
 				loadStudent(request, response);
 				break;
+				
+			case "UPDATE":
+				updateStudent(request, response);
+				break;
 
 			default:
 				listStudents(request, response);
@@ -80,9 +84,28 @@ public class StudentControllerServlet extends HttpServlet {
 		}
 	}
 
+	private void updateStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		// read student id from the hidden input in update-student-form.jsp 
+		int id = Integer.parseInt(request.getParameter("studentId"));
+		String firstName = request.getParameter("firstName");
+		String lastName = request.getParameter("lastName");
+		String email = request.getParameter("email");
+		
+		// create a new student object
+		Student student = new Student(id, firstName, lastName, email);
+		
+		// perfomr update on database
+		studentDbUtil.updateStudent(student);
+		
+		// send the user back to the "list students" page
+		listStudents(request, response);
+		
+	}
+
 	private void loadStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		// read student id from form data
+		// read student id from link param in list-students.jsp
 		String studentId = request.getParameter("studentId");
 		
 		// get student form database (db util)
