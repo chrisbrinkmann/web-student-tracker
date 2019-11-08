@@ -73,6 +73,10 @@ public class StudentControllerServlet extends HttpServlet {
 			case "UPDATE":
 				updateStudent(request, response);
 				break;
+				
+			case "DELETE":
+				deleteStudent(request, response);
+				break;
 
 			default:
 				listStudents(request, response);
@@ -82,6 +86,17 @@ public class StudentControllerServlet extends HttpServlet {
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}
+	}
+
+	private void deleteStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// read student id from the hidden input in update-student-form.jsp 
+		int id = Integer.parseInt(request.getParameter("studentId"));
+
+		// perfomr update on database
+		studentDbUtil.deleteStudent(id);
+		
+		// send the user back to the "list students" page
+		listStudents(request, response);
 	}
 
 	private void updateStudent(HttpServletRequest request, HttpServletResponse response) throws Exception {

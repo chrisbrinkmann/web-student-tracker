@@ -43,18 +43,21 @@
 							<c:param name="command" value="LOAD" />
 							<c:param name="studentId" value="${student.id }" />
 						</c:url>
-						
+
 						<c:url var="deleteLink" value="StudentControllerServlet">
 							<c:param name="command" value="DELETE" />
 							<c:param name="studentId" value="${student.id }" />
 						</c:url>
-						
+
 
 						<tr>
 							<td>${student.firstName }</td>
 							<td>${student.lastName }</td>
 							<td>${student.email }</td>
-							<td><a href=${updateLink }>Update</a> | <a href=${deleteLink }>Delete</a></td>
+							<td><a href=${updateLink }>Update</a> | <a
+								href=${deleteLink }
+								onclick="if (!confirm('Are you sure you want to DELETE?')) return false">
+									Delete</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

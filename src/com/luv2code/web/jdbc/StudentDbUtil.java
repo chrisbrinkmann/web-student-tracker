@@ -186,4 +186,31 @@ public class StudentDbUtil {
 		}
 
 	}
+
+	public void deleteStudent(int id) throws Exception {
+	// initialize our JDBC objects
+			Connection myConn = null;
+			PreparedStatement myStmt = null;
+
+			try {
+				// get a connection from the pool
+				myConn = dataSource.getConnection();
+
+				// create sql statement
+				String sql = "delete from student where id = ?";
+
+				// prepare statement
+				myStmt = myConn.prepareStatement(sql);
+
+				// set the param values (?) for the student
+				myStmt.setInt(1, id);
+
+				// execute query
+				myStmt.execute();
+
+			} finally {
+				// close JDBC objects
+				close(myConn, myStmt, null);
+			}
+	}
 }
