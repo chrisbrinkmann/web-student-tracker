@@ -21,7 +21,7 @@
 	<div id="container">
 		<div id="content">
 
-			<input type="button" value="Add User"
+			<input type="button" value="Add Student"
 				onclick="window.location.href='add-student-form.jsp'; return false;"
 				class="add-student-button" />
 
@@ -38,17 +38,23 @@
 				<tbody>
 					<c:forEach var="student" items="${students }">
 
-						<!-- Set up a link for each student -->
-						<c:url var="link" value="StudentControllerServlet">
+						<!-- Set up update/delete link for each student -->
+						<c:url var="updateLink" value="StudentControllerServlet">
 							<c:param name="command" value="LOAD" />
 							<c:param name="studentId" value="${student.id }" />
 						</c:url>
+						
+						<c:url var="deleteLink" value="StudentControllerServlet">
+							<c:param name="command" value="DELETE" />
+							<c:param name="studentId" value="${student.id }" />
+						</c:url>
+						
 
 						<tr>
 							<td>${student.firstName }</td>
 							<td>${student.lastName }</td>
 							<td>${student.email }</td>
-							<td><a href=${link }>Update</a> | <a href=#>Delete</a></td>
+							<td><a href=${updateLink }>Update</a> | <a href=${deleteLink }>Delete</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
