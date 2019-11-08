@@ -14,7 +14,7 @@
 
 	<div id="wrapper">
 		<div id="header">
-			<h2>User List</h2>
+			<h2>FooBar University</h2>
 		</div>
 	</div>
 
