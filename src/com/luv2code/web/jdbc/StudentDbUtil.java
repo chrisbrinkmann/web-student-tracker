@@ -18,6 +18,7 @@ public class StudentDbUtil {
 	public List<Student> getStudents() throws Exception {
 		List<Student> students = new ArrayList<Student>();
 
+		// initialize our JDBC objects
 		Connection myConn = null;
 		Statement myStmt = null;
 		ResultSet myRs = null;
