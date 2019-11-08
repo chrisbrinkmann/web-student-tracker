@@ -10,11 +10,6 @@
 <title>Student Tracker</title>
 </head>
 
-<%-- <%
-	// get the students form the request object (sent by servlet)
-	List<Student> students = (List<Student>) request.getAttribute("students");
-%> --%>
-
 <body>
 
 	<div id="wrapper">
